@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ななみん🕊️ 気軽にチェック</title>
+<style>
+:root{
+  --green:#4FBF86; --green-dark:#2E9E68; --green-light:#9DDDB7; --green-pale:#E3F6EB;
+  --orange:#F5A524; --orange-dark:#D98A0F; --orange-light:#F9D48A; --orange-pale:#FFF1D4;
+  --text-dark:#2B3A32; --text-mid:#4A5F52; --text-light:#8AA394;
+  --shadow-m:0 4px 18px rgba(46,158,104,.14); --radius:20px; --radius-lg:26px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{height:100%;}
+body{min-height:100%;background:linear-gradient(170deg,#F1FAF4 0%,#FFFFFF 50%,#FFF8E8 100%);
+  font-family:'Hiragino Maru Gothic ProN','BIZ UDPGothic',sans-serif;color:var(--text-dark);overflow-x:hidden;}
+#app{width:100%;max-width:430px;min-height:100vh;margin:0 auto;padding:0 20px 40px;display:flex;flex-direction:column;align-items:center;}
+
+.top-wave{width:calc(100% + 40px);margin-left:-20px;height:150px;
+  background:linear-gradient(135deg,#4FBF86 0%,#9DDDB7 55%,#F9D48A 100%);
+  border-radius:0 0 60% 60% / 0 0 36px 36px;flex-shrink:0;position:relative;overflow:hidden;}
+.top-wave::before{content:'';position:absolute;top:-40px;right:-30px;width:140px;height:140px;background:rgba(255,255,255,.22);border-radius:50%;}
+.top-wave::after{content:'';position:absolute;bottom:-20px;left:-10px;width:90px;height:90px;background:rgba(255,255,255,.16);border-radius:50%;}
+
+.center{width:100%;text-align:center;padding-top:14px;}
+.mascot{width:170px;height:140px;margin:-70px auto 10px;font-size:80px;line-height:140px;
+  filter:drop-shadow(0 10px 16px rgba(46,158,104,.28));animation:float 3s ease-in-out infinite;}
+.mascot img{width:100%;height:100%;object-fit:contain;}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.eyebrow{display:inline-block;background:linear-gradient(135deg,var(--green) 0%,var(--orange) 100%);color:#fff;
+  font-size:11px;font-weight:800;padding:5px 16px;border-radius:99px;letter-spacing:.08em;margin-bottom:12px;}
+h1{font-size:23px;font-weight:900;line-height:1.4;margin-bottom:10px;}
+.desc{font-size:13.5px;color:var(--text-mid);line-height:1.75;margin-bottom:26px;font-weight:600;}
+
+.cards{width:100%;display:flex;flex-direction:column;gap:16px;}
+.card{display:block;width:100%;background:#fff;border-radius:var(--radius-lg);padding:20px 18px;text-align:left;
+  text-decoration:none;color:inherit;box-shadow:var(--shadow-m);border:2px solid var(--green-light);
+  transition:transform .1s,box-shadow .1s;position:relative;}
+.card:active{transform:scale(.97);}
+.card.orange{border-color:var(--orange-light);}
+.card-emoji{font-size:34px;display:block;margin-bottom:8px;}
+.card-title{font-size:16.5px;font-weight:900;line-height:1.4;margin-bottom:5px;}
+.card-sub{font-size:12.5px;color:var(--text-mid);line-height:1.6;font-weight:600;}
+.card-arrow{position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:20px;color:var(--green-dark);}
+.card.orange .card-arrow{color:var(--orange-dark);}
+.card-badge{display:inline-block;font-size:10.5px;font-weight:800;padding:3px 10px;border-radius:99px;margin-top:10px;
+  background:var(--green-pale);color:var(--green-dark);}
+.card.orange .card-badge{background:var(--orange-pale);color:var(--orange-dark);}
+
+.foot{margin-top:26px;font-size:11px;color:var(--text-light);line-height:1.8;font-weight:600;}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="top-wave"></div>
+  <div class="center">
+    <div class="mascot"><img src="bird.webp" alt="シマエナガ" onerror="this.parentElement.textContent='🕊️'"></div>
+    <div class="eyebrow">🌿 ようこそ</div>
+    <h1>今、どっちが気になる？</h1>
+    <div class="desc">選ぶだけで、あなたに合いそうな<br>ヒントが見つかるチェックにご案内するね</div>
+  </div>
+
+  <div class="cards">
+    <a class="card" href="shindan_manabi.html">
+      <span class="card-emoji">🌱</span>
+      <div class="card-title">子どもの学び方が気になる</div>
+      <div class="card-sub">授業のペース、行きしぶり、勉強のつまずき…<br>うちの子に合う学び方のヒントをチェック</div>
+      <span class="card-badge">8問・約1分</span>
+      <span class="card-arrow">›</span>
+    </a>
+
+    <a class="card orange" href="shindan_school.html">
+      <span class="card-emoji">🕊️</span>
+      <div class="card-title">自分の働き方が気になる</div>
+      <div class="card-sub">外で働けない、でも何か始めたい…<br>あなたに向いてる在宅スキルをチェック</div>
+      <span class="card-badge">6問・約30秒</span>
+      <span class="card-arrow">›</span>
+    </a>
+  </div>
+
+  <div class="foot">🆓 どちらも完全無料・スマホだけでOKです</div>
+</div>
+</body>
+</html>
