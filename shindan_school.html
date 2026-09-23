@@ -57,6 +57,10 @@ body{
 .accent-bar{width:calc(100% + 40px);margin-left:-20px;height:5px;background:linear-gradient(90deg,var(--teal) 0%,var(--coral) 100%);flex-shrink:0;}
 
 .progress-wrap{width:100%;margin-top:18px;flex-shrink:0;}
+.quiz-topbar{width:100%;display:flex;justify-content:space-between;align-items:center;margin-top:8px;flex-shrink:0;}
+.btn-back{background:none;border:none;font-family:inherit;font-size:12.5px;font-weight:700;color:var(--text-light);cursor:pointer;padding:6px 4px;}
+.btn-back:disabled{opacity:.3;cursor:default;}
+.btn-home-quiz{font-size:12.5px;font-weight:700;color:var(--text-light);text-decoration:none;padding:6px 4px;}
 .progress-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
 .progress-meta .label{font-size:11px;font-weight:700;color:var(--text-light);letter-spacing:.06em;}
 .progress-meta .step{background:var(--coral-pale);color:var(--coral);font-size:11px;font-weight:800;padding:3px 12px;border-radius:99px;}
@@ -175,6 +179,10 @@ body{
 
 <div class="screen" id="s-quiz">
   <div class="accent-bar"></div>
+  <div class="quiz-topbar">
+    <button class="btn-back" id="btn-back" type="button" onclick="App.goBack()">← もどる</button>
+    <a class="btn-home-quiz" href="index.html">🏠 はじめから</a>
+  </div>
   <div class="progress-wrap">
     <div class="progress-meta">
       <span class="label">在宅スキル診断</span>
@@ -380,6 +388,7 @@ const RESULTS = {
 const App = (() => {
   let qIndex = 0;
   let scores = {"動画編集":0,"ライター":0,"マーケ":0,"AI":0};
+  let history = [];
 
   function setImg(id, url) {
     const el = document.getElementById(id);
@@ -406,6 +415,7 @@ const App = (() => {
 
     const imgs = [IMG_MAIN, IMG_VIDEO, IMG_WRITE, IMG_MARK, IMG_AI, IMG_MAIN];
     setImg('img-quiz', imgs[qIndex % imgs.length]);
+    document.getElementById('btn-back').disabled = (qIndex === 0);
 
     const wrap = document.getElementById('options');
     wrap.innerHTML = '';
@@ -419,9 +429,18 @@ const App = (() => {
   }
 
   function answer(pts) {
+    history.push(pts);
     TYPES.forEach((t, i) => { scores[t] += pts[i]; });
     qIndex++;
     if (qIndex < QUESTIONS.length) { renderQ(); } else { showResult(); }
+  }
+
+  function goBack() {
+    if (qIndex === 0) return;
+    const last = history.pop();
+    if (last) { TYPES.forEach((t, i) => { scores[t] -= last[i]; }); }
+    qIndex--;
+    renderQ();
   }
 
   function showResult() {
@@ -448,17 +467,18 @@ const App = (() => {
   return {
     init() { setImg('img-start', IMG_MAIN); renderQ(); goTo('s-start'); },
     start() {
-      qIndex = 0; scores = {"動画編集":0,"ライター":0,"マーケ":0,"AI":0};
+      qIndex = 0; scores = {"動画編集":0,"ライター":0,"マーケ":0,"AI":0}; history = [];
       renderQ(); goTo('s-quiz');
     },
     restart() {
-      qIndex = 0; scores = {"動画編集":0,"ライター":0,"マーケ":0,"AI":0};
+      qIndex = 0; scores = {"動画編集":0,"ライター":0,"マーケ":0,"AI":0}; history = [];
       renderQ();
       const cur = document.querySelector('.screen.active');
       const start = document.getElementById('s-start');
       cur.classList.add('exit');
       setTimeout(() => { cur.classList.remove('active','exit'); start.classList.add('active'); start.scrollTop = 0; }, 330);
-    }
+    },
+    goBack
   };
 })();
 
