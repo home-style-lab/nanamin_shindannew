@@ -129,7 +129,8 @@ body{
 .push-box{width:100%;background:var(--white);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow-m);margin-top:12px;border-top:3px solid var(--coral-light);flex-shrink:0;}
 .push-msg{font-size:13px;line-height:1.85;color:var(--text-mid);font-weight:500;white-space:pre-line;}
 
-.cta-section{width:100%;margin-top:18px;flex-shrink:0;}
+.cta-section{width:100%;margin-top:18px;flex-shrink:0;text-align:center;}
+.pr-tag{display:inline-block;background:#fff;border:1.5px solid var(--text-light);color:var(--text-light);font-size:10px;font-weight:900;padding:1px 9px;border-radius:6px;margin-bottom:8px;}
 .btn-cta{
   display:block;width:100%;
   background:linear-gradient(135deg,#D06050 0%,#B04030 100%);
@@ -148,6 +149,7 @@ body{
 
 .btn-retry{background:none;border:2px solid var(--beige);border-radius:12px;padding:13px;width:100%;font-family:inherit;font-size:13px;font-weight:700;color:var(--text-light);cursor:pointer;margin-top:12px;transition:background .15s;flex-shrink:0;}
 .btn-retry:active{background:var(--beige);}
+.btn-top{display:block;width:100%;text-align:center;background:none;border:none;font-family:inherit;font-size:12px;font-weight:700;color:var(--coral);cursor:pointer;margin-top:14px;text-decoration:underline;flex-shrink:0;}
 .spacer{flex:1;min-height:20px;}
 </style>
 </head>
@@ -216,6 +218,7 @@ body{
     <div class="push-msg" id="push-msg"></div>
   </div>
   <div class="cta-section">
+    <span class="pr-tag">PR</span>
     <a id="cta-btn" href="#" class="btn-cta">
       <span class="btn-cta-main" id="cta-main-text"></span>
       <span class="btn-cta-sub">無料カウンセリングはこちらから</span>
@@ -223,6 +226,7 @@ body{
     <div class="cta-note">※ 完全無料・スマホでおうちから参加できます</div>
   </div>
   <button class="btn-retry" onclick="App.restart()">🔄 もう一度診断する</button>
+  <a class="btn-top" href="index.html">🏠 はじめの画面に戻る（子どもの学び方チェックも見る）</a>
   <div class="spacer"></div>
 </div>
 
